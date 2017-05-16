@@ -36,8 +36,9 @@
         "sort-packages": true
     },
     "scripts": {
-        "check-style": "phpcs -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests",
-        "fix-style": "phpcbf -p --standard=PSR2 --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src tests",
+        "test": "phpspec r",
+        "check-style": "phpcs -p --standard=psr2-override.xml --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src",
+        "fix-style": "phpcbf -p --standard=psr2-override.xml --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src",
         "clean": "rm -r ./{vendor,bin}"
     }
 }
