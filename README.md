@@ -1,4 +1,4 @@
-[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Latest Version](https://img.shields.io/github/release/NigelGreenway/reactive-slim.svg?style=flat-square)](https://github.com/NigelGreenway/reactive-slim/releases)
 [![Software License][ico-license]](LICENSE.md)
 [![Build Status][ico-travis]][link-travis]
 [![Total Downloads][ico-downloads]][link-downloads]
@@ -69,7 +69,6 @@ This has been created to plug two great packages together:
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
 
-[ico-version]: https://img.shields.io/packagist/v/NigelGreenway/reactive-slim.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [ico-travis]: https://img.shields.io/travis/NigelGreenway/reactive-slim/master.svg?style=flat-square
 [ico-downloads]: https://img.shields.io/packagist/dt/NigelGreenway/reactive-slim.svg?style=flat-square
