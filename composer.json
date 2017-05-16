@@ -1,5 +1,5 @@
 {
-    "name": "nigelgreenway/slimphp-reactphp-bridge",
+    "name": "nigelgreenway/reactive-slim",
     "description": "A bridge to use SlimPHP within ReactPHP",
     "type": "library",
     "require": {
@@ -23,12 +23,12 @@
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "NigelGreenway\\SlimPHP-ReactPHP-Bridge\\": "src"
+            "ReactiveSlim\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "NigelGreenway\\SlimPHP-ReactPHP-Bridge\\": "tests"
+            "ReactiveSlim\\": "tests"
         }
     },
     "config": {
