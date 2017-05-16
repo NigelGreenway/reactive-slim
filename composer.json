@@ -3,14 +3,15 @@
     "description": "A bridge to use SlimPHP within ReactPHP",
     "type": "library",
     "require": {
-        "php": "^7.1",
-        "react/react": "^0.4",
-        "slim/slim": "^3.8"
+        "php": "^7.0",
+        "react/http": "^0.6",
+        "slim/slim": "^3.8.0",
+        "zendframework/zend-diactoros": "^1.4"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.2",
-        "squizlabs/php_codesniffer": "^2.3",
-        "sebastianfeldmann/captainhook": "^2.0"
+        "phpspec/phpspec": "^3.4",
+        "sebastianfeldmann/captainhook": "^2.0",
+        "squizlabs/php_codesniffer": "^2.3"
     },
     "authors": [
         {
@@ -24,6 +25,9 @@
     "autoload": {
         "psr-4": {
             "ReactiveSlim\\": "src/"
+        },
+        "psr-0": {
+            "": "src/"
         }
     },
     "autoload-dev": {

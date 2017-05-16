@@ -1,0 +1,6 @@
+suites:
+    reactiveslim_suite:
+        namespace: ReactiveSlim
+        psr4_prefix: ReactiveSlim
+        src_path: src
+formatter.name: pretty
