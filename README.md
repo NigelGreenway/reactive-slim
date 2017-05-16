@@ -69,11 +69,11 @@ This has been created to plug two great packages together:
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
 
 
-[ico-version]: https://img.shields.io/packagist/v/nigelgreenway/reactive-slim.svg?style=flat-square
+[ico-version]: https://img.shields.io/packagist/v/NigelGreenway/reactive-slim.svg?style=flat-square
 [ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
-[ico-travis]: https://img.shields.io/travis/nigelgreenway/reactive-slim/master.svg?style=flat-square
-[ico-downloads]: https://img.shields.io/packagist/dt/nigelgreenway/reactive-slim.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/NigelGreenway/reactive-slim/master.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/NigelGreenway/reactive-slim.svg?style=flat-square
 
-[link-packagist]: https://packagist.org/packages/nigelgreenway/reactive-slim
-[link-travis]: https://travis-ci.org/nigelgreenway/reactive-slim
-[link-downloads]: https://packagist.org/packages/nigelgreenway/reactive-slim
+[link-packagist]: https://packagist.org/packages/NigelGreenway/reactive-slim
+[link-travis]: https://travis-ci.org/NigelGreenway/reactive-slim
+[link-downloads]: https://packagist.org/packages/NigelGreenway/reactive-slim
