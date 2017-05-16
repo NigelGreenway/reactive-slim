@@ -1,3 +1,8 @@
+[![Latest Version on Packagist][ico-version]][link-packagist]
+[![Software License][ico-license]](LICENSE.md)
+[![Build Status][ico-travis]][link-travis]
+[![Total Downloads][ico-downloads]][link-downloads]
+
 # README
 
 Reactive Slim is a bridge where you can pass your [Slim](https://www.slimframework.com/) instance and reap the benefit's of [ReactPHP](http://reactphp.org/)'s event driven, non-blocking I/O usage of PHP.
@@ -62,3 +67,13 @@ This has been created to plug two great packages together:
 ## License
 
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+
+
+[ico-version]: https://img.shields.io/packagist/v/nigelgreenway/reactive-slim.svg?style=flat-square
+[ico-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
+[ico-travis]: https://img.shields.io/travis/nigelgreenway/reactive-slim/master.svg?style=flat-square
+[ico-downloads]: https://img.shields.io/packagist/dt/nigelgreenway/reactive-slim.svg?style=flat-square
+
+[link-packagist]: https://packagist.org/packages/nigelgreenway/reactive-slim
+[link-travis]: https://travis-ci.org/nigelgreenway/reactive-slim
+[link-downloads]: https://packagist.org/packages/nigelgreenway/reactive-slim
