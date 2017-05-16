@@ -43,6 +43,11 @@
         "test": "phpspec r",
         "check-style": "phpcs -p --standard=psr2-override.xml --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src",
         "fix-style": "phpcbf -p --standard=psr2-override.xml --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src",
-        "clean": "rm -r ./{vendor,bin}"
+        "clean": "rm -r ./{vendor,bin}",
+        "post-install-cmd": [
+            "captainhook install",
+            "composer check-style",
+            "composer test"
+        ]
     }
 }
