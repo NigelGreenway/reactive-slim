@@ -8,6 +8,9 @@
         "actions": [
             {
                 "action": "./bin/phpcs -p --standard=psr2-override.xml src"
+            },
+            {
+                "action": "composer validate --quiet"
             }
         ]
     },
