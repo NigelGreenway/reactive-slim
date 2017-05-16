@@ -10,5 +10,5 @@ before_script:
   - travis_retry composer install --no-interaction --prefer-source
 
 script:
-  - composer check-style
-  - composer test
+  - ./bin/phpcs src --standard=psr2-override.xml
+  - ./bin/phpspec r
