@@ -5,7 +5,7 @@ services:
 
 before_install:
   - docker build .
-  - docker run -d -p 1351:1351 --name reactive_slim
+  - docker run -d -p 1351:1351 --name reactive_slim nigelgreenway/reactive-slim
 
 after_install:
   - docker stop reactive_slim
