@@ -61,8 +61,8 @@ If you discover any security related issues, please email :author_email instead 
 - [All Contributors](link-contributors)
 
 This has been created to plug two great packages together:
-- [ReactPHP](https://github.com/slimphp/Slim/graphs/contributors)
-- [SlimPHP](https://github.com/reactphp/react/graphs/contributors)
+- [SlimPHP](https://github.com/slimphp/Slim/graphs/contributors)
+- [ReactPHP](https://github.com/reactphp/react/graphs/contributors)
 
 ## License
 
