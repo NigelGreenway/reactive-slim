@@ -23,6 +23,8 @@ final class Server
 {
     /** @var SlimInstance  $slimInstance*/
     private $slimInstance;
+    /** @var string        $webRoot */
+    private $webRoot;
     /** @var string        $host */
     private $host = '0.0.0.0';
     /** @var int           $port */
@@ -37,9 +39,15 @@ final class Server
 
     /**
      * @param SlimInstance $slimInstance
+     * @param string       $directoryPath | null
      */
-    public function __construct(SlimInstance $slimInstance)
-    {
+    public function __construct(
+        SlimInstance $slimInstance,
+        string       $directoryPath = null
+    ) {
+        $this->isAValidDirectory($directoryPath);
+
+        $this->webRoot = $directoryPath;
         $this->slimInstance = $slimInstance;
     }
 
@@ -79,21 +87,28 @@ final class Server
         $this->initialiseReactPHP();
 
         $this->server->on('request', function (ReactRequest $request, ReactResponse $response) {
-            $psr7Request = new ServerRequest(
-                [],
-                [],
-                $request->getPath(),
-                $request->getMethod(),
-                (new Stream('php://input', 'w+')),
-                $request->getHeaders(),
-                $request->getHeader('cookie'),
-                $request->getQueryParams()
-            );
 
-            $slimResponse = $this->slimInstance->process($psr7Request, new SlimResponse());
-            $response->writeHead($slimResponse->getStatusCode(), $slimResponse->getHeaders());
-            $slimResponse->getBody()->rewind();
-            $response->end($slimResponse->getBody()->getContents());
+            if (preg_match('/\.(?:css|png|jpg|jpeg|gif)$/', $request->getPath())) {
+                $body = file_get_contents($this->webRoot . $request->getPath());
+                $response->writeHead(['Content-Type' => $request->getHeaders()['Accept'][0]]);
+                $response->end($body);
+            } else {
+                $psr7Request = new ServerRequest(
+                    [],
+                    [],
+                    $request->getPath(),
+                    $request->getMethod(),
+                    (new Stream('php://input', 'w+')),
+                    $request->getHeaders(),
+                    $request->getHeader('cookie'),
+                    $request->getQueryParams()
+                );
+
+                $slimResponse = $this->slimInstance->process($psr7Request, new SlimResponse());
+                $response->writeHead($slimResponse->getStatusCode(), $slimResponse->getHeaders());
+                $slimResponse->getBody()->rewind();
+                $response->end($slimResponse->getBody()->getContents());
+            }
         });
 
         if ($this->environment !== ServerEnvironment::PRODUCTION) {
@@ -122,5 +137,20 @@ final class Server
         );
         $this->loop    = $loop;
         $this->server  = new HttpServer($socketServer);
+    }
+
+    /**
+     * @param string|null $directoryPath
+     *
+     * @throws DirectoryNotFound
+     * @return void
+     */
+    public function isAValidDirectory($directoryPath)
+    {
+        if ($directoryPath !== null
+            && is_dir($directoryPath) === false
+        ) {
+            throw new DirectoryNotFound($directoryPath);
+        }
     }
 }
