@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace spec\ReactiveSlim;
 
+use ReactiveSlim\DirectoryNotFound;
 use ReactiveSlim\Server;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -38,5 +39,18 @@ class ServerSpec extends ObjectBehavior
         $this
             ->setEnvironment(ServerEnvironment::DEVELOPMENT)
             ->shouldBeAnInstanceOf(Server::class);
+    }
+
+    function it_should_contain_a_valid_asset_directory(App $slimInstance)
+    {
+        $this
+            ->beConstructedWith($slimInstance, __DIR__);
+    }
+
+    function it_should_throw_a_DirectoryNotFound_exeption(App $slimInstance)
+    {
+        $this
+            ->shouldThrow(DirectoryNotFound::class)
+            ->during('__construct', [$slimInstance, __DIR__.'/../directory_does_not_exists']);
     }
 }

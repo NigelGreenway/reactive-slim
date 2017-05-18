@@ -6,12 +6,27 @@ $slim = new \Slim\App();
 
 // Some slim configuration
 $slim->get('/', function( \Psr\Http\Message\RequestInterface $req, \Psr\Http\Message\ResponseInterface $res) {
+
+    $html = <<<HTML
+<html>
+    <head>
+        <link rel="stylesheet" href="/asset/style.css">
+    </head>
+    <body>
+        <h1>Welcome to <span class="reactive">Reactive</span><span class="slim">Slim</span></h1>
+    </body>
+</html>
+HTML;
+
+
     return $res
         ->withHeader('Content-Type', 'text/html')
         ->getBody()
-        ->write('<h1>Welcome to ReactiveSlim</h1>');
+        ->write(
+            $html
+        );
 });
 
-(new \ReactiveSlim\Server($slim))
+(new \ReactiveSlim\Server($slim, __DIR__))
     ->setEnvironment(\ReactiveSlim\ServerEnvironment::DEVELOPMENT)
     ->run();
