@@ -47,7 +47,7 @@ final class Server
      * @param string $host
      * @return Server
      */
-    public function withHost(string $host) :self
+    public function setHost(string $host) :self
     {
         $this->host = $host;
         return $this;
@@ -57,7 +57,7 @@ final class Server
      * @param int $port
      * @return Server
      */
-    public function withPort(int $port) :self
+    public function setPort(int $port) :self
     {
         $this->port = $port;
         return $this;
@@ -67,7 +67,7 @@ final class Server
      * @param int $environment
      * @return Server
      */
-    public function withEnvironment(int $environment) :self
+    public function setEnvironment(int $environment) :self
     {
         $this->environment = $environment;
         return $this;
