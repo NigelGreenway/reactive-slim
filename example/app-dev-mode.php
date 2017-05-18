@@ -13,5 +13,5 @@ $slim->get('/', function( \Psr\Http\Message\RequestInterface $req, \Psr\Http\Mes
 });
 
 (new \ReactiveSlim\Server($slim))
-    ->withEnvironment(\ReactiveSlim\ServerEnvironment::DEVELOPMENT)
+    ->setEnvironment(\ReactiveSlim\ServerEnvironment::DEVELOPMENT)
     ->run();
