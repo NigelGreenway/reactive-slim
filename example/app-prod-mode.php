@@ -24,5 +24,5 @@ HTML;
         ->write($html);
 });
 
-(new \ReactiveSlim\Server($slim, __DIR__))
+(new \ReactiveSlim\Server($slim, __DIR__.'/public'))
     ->run();

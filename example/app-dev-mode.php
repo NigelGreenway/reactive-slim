@@ -27,6 +27,6 @@ HTML;
         );
 });
 
-(new \ReactiveSlim\Server($slim, __DIR__))
+(new \ReactiveSlim\Server($slim, __DIR__.'/public'))
     ->setEnvironment(\ReactiveSlim\ServerEnvironment::DEVELOPMENT)
     ->run();
