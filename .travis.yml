@@ -18,3 +18,4 @@ before_script:
 script:
   - ./bin/phpcs src --standard=psr2-override.xml
   - ./bin/phpspec r
+  - ./bin/phpunit -c ./test/phpunit.xml.dist ./test/
