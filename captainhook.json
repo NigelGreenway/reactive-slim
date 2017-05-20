@@ -16,6 +16,10 @@
     },
     "pre-push": {
         "enabled": false,
-        "actions": []
+        "actions": [
+            {
+                "action": "composer test"
+            }
+        ]
     }
 }
