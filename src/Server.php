@@ -97,10 +97,11 @@ final class Server
 
                 $request->on('data', function ($data) use ($stream) {
                     $stream->write($data);
-                    $stream->rewind();
                 });
 
                 $request->on('end', function () use ($request, $response, $stream) {
+                    $stream->rewind();
+
                     $psr7Request = new ServerRequest(
                         [],
                         [],
