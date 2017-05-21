@@ -55,10 +55,10 @@
         "sort-packages": true
     },
     "scripts": {
-        "docker-build": "docker build -t nigelgreenway/reactive-slim .",
-        "docker-run": "docker run -d -p 1351:1351 --name reactive_slim nigelgreenway/reactive-slim",
-        "docker-start": "docker start reactive_slim",
-        "docker-stop": "docker stop reactive_slim",
+        "build": "docker build -t nigelgreenway:reactive-slim .",
+        "start": "docker run -d -p 1351:1351 --name reactive_slim nigelgreenway:reactive-slim",
+        "restart": "docker restart reactive_slim",
+        "stop": "docker stop reactive_slim",
         "test": "phpspec r && phpunit -c ./test/phpunit.xml.dist ./test",
         "check-style": "phpcs -p --standard=psr2-override.xml --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src",
         "fix-style": "phpcbf -p --standard=psr2-override.xml --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src",
