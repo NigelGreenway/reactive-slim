@@ -13,6 +13,6 @@ $slim->get('/', function( \Psr\Http\Message\RequestInterface $req, \Psr\Http\Mes
 });
 
 (new \ReactiveSlim\Server($slim))
-    ->withHost('0.0.0.0')
-    ->withPort(1351)
+    ->setHost('0.0.0.0')
+    ->setPort(1351)
     ->run();
