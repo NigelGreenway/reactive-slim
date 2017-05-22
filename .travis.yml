@@ -3,10 +3,6 @@ language: php
 services:
   - docker
 
-after_install:
-  - docker stop reactive_slim
-  - docker rm reactive_slim
-
 php:
   - 7.0
   - 7.1
@@ -17,5 +13,4 @@ before_script:
 
 script:
   - ./bin/phpcs -p --standard=psr2-override.xml src
-  - ./bin/phpspec r
-  - ./bin/phpunit -c ./test/phpunit.xml.dist ./test/
+  - composer test
