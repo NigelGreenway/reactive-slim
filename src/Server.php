@@ -89,9 +89,14 @@ final class Server
         $this->server->on('request', function (ReactRequest $request, ReactResponse $response) {
 
             if (preg_match('/\.(?:css|png|jpg|jpeg|gif)$/', $request->getPath())) {
-                $body = file_get_contents($this->webRoot . $request->getPath());
-                $response->writeHead(200, ['Content-Type' => $request->getHeaders()['Accept'][0]]);
-                $response->end($body);
+                $assetFilePath = sprintf('%s%s', $this->webRoot, $request->getPath());
+                if (is_file($assetFilePath) === true) {
+                    $response->writeHead(200, ['Content-Type' => $request->getHeaders()['Accept'][0]]);
+                    $response->end(file_get_contents($assetFilePath));
+                } else {
+                    $response->writeHead(404, ['Content-Type' => 'text/plain']);
+                    $response->end(sprintf('%s was not found', $request->getPath()));
+                }
             } else {
                 $stream = new Stream('php://memory', 'w+');
 
