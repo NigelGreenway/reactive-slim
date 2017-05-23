@@ -93,21 +93,31 @@ final class Server
                 $response->writeHead(['Content-Type' => $request->getHeaders()['Accept'][0]]);
                 $response->end($body);
             } else {
-                $psr7Request = new ServerRequest(
-                    [],
-                    [],
-                    $request->getPath(),
-                    $request->getMethod(),
-                    (new Stream('php://input', 'w+')),
-                    $request->getHeaders(),
-                    $request->getHeader('cookie'),
-                    $request->getQueryParams()
-                );
+                $stream = new Stream('php://memory', 'w+');
 
-                $slimResponse = $this->slimInstance->process($psr7Request, new SlimResponse());
-                $response->writeHead($slimResponse->getStatusCode(), $slimResponse->getHeaders());
-                $slimResponse->getBody()->rewind();
-                $response->end($slimResponse->getBody()->getContents());
+                $request->on('data', function ($data) use ($stream) {
+                    $stream->write($data);
+                });
+
+                $request->on('end', function () use ($request, $response, $stream) {
+                    $stream->rewind();
+
+                    $psr7Request = new ServerRequest(
+                        [],
+                        [],
+                        $request->getPath(),
+                        $request->getMethod(),
+                        $stream,
+                        $request->getHeaders(),
+                        $request->getHeader('cookie'),
+                        $request->getQueryParams()
+                    );
+
+                    $slimResponse = $this->slimInstance->process($psr7Request, new SlimResponse());
+                    $response->writeHead($slimResponse->getStatusCode(), $slimResponse->getHeaders());
+                    $slimResponse->getBody()->rewind();
+                    $response->end($slimResponse->getBody()->getContents());
+                });
             }
         });
 
