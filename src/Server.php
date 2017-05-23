@@ -90,7 +90,7 @@ final class Server
 
             if (preg_match('/\.(?:css|png|jpg|jpeg|gif)$/', $request->getPath())) {
                 $body = file_get_contents($this->webRoot . $request->getPath());
-                $response->writeHead(['Content-Type' => $request->getHeaders()['Accept'][0]]);
+                $response->writeHead(200, ['Content-Type' => $request->getHeaders()['Accept'][0]]);
                 $response->end($body);
             } else {
                 $stream = new Stream('php://memory', 'w+');
