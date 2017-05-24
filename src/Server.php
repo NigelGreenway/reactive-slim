@@ -35,6 +35,8 @@ final class Server
     private $loop;
     /** @var HttpServer    $server */
     private $server;
+    /** @var string        $whiteListedAssetFileTypes */
+    private $whiteListedAssetFileTypes = 'css|css.map|png|jpg|jpeg|gif|js|js.map';
 
 
     /**
@@ -81,6 +83,27 @@ final class Server
         return $this;
     }
 
+    /**
+     * @param array|string $fileTypes
+     * @return Server
+     */
+    public function setAllowedFileTypes($fileTypes) :self
+    {
+        if (is_array($fileTypes) === true) {
+            $fileTypeString = '';
+            foreach ($fileTypes as $loopIndex => $fileType) {
+                $fileTypeString .=  $loopIndex === 0 ? $fileType : '|' . $fileType;
+            }
+            $this->whiteListedAssetFileTypes = $fileTypeString;
+            return $this;
+        }
+
+        if (is_string($fileTypes) === true) {
+            $this->whiteListedAssetFileTypes = $fileTypes;
+            return $this;
+        }
+    }
+
     /** @return void */
     public function run()
     {
@@ -88,7 +111,9 @@ final class Server
 
         $this->server->on('request', function (ReactRequest $request, ReactResponse $response) {
 
-            if (preg_match('/\.(?:css|png|jpg|jpeg|gif)$/', $request->getPath())) {
+            $fileTypes = sprintf('/\.(?:%s)$/', $this->whiteListedAssetFileTypes);
+
+            if (preg_match($fileTypes, $request->getPath())) {
                 $assetFilePath = sprintf('%s%s', $this->webRoot, $request->getPath());
                 if (is_file($assetFilePath) === true) {
                     $response->writeHead(200, ['Content-Type' => $request->getHeaders()['Accept'][0]]);
@@ -128,9 +153,10 @@ final class Server
 
         if ($this->environment !== ServerEnvironment::PRODUCTION) {
             echo sprintf(
-                " >> Listening on http://%s:%d\n\nIn %s environment\n\n",
+                " >> Listening on http://%s:%d\n\nAssets allowed to be served: %s\n\nIn %s environment\n\n",
                 $this->host,
                 $this->port,
+                str_replace('|', ', ', $this->whiteListedAssetFileTypes),
                 ServerEnvironment::getEnvironmentName($this->environment)
             );
         }
@@ -138,6 +164,18 @@ final class Server
         $this->loop->run();
     }
 
+    /**
+     * @return array
+     */
+    public function getConfigVariables() :array
+    {
+        return [
+            'host'                  => $this->host,
+            'port'                  => $this->port,
+            'env'                   => $this->environment,
+            'allowedAssetFileTypes' => $this->whiteListedAssetFileTypes,
+        ];
+    }
 
     /**
      * Initialise ReactPHP setup
