@@ -2,6 +2,7 @@
 declare(strict_types=1);
 namespace spec\ReactiveSlim;
 
+use ReactiveSlim\AssetType;
 use ReactiveSlim\DirectoryNotFound;
 use ReactiveSlim\Server;
 use PhpSpec\ObjectBehavior;
@@ -17,7 +18,7 @@ class ServerSpec extends ObjectBehavior
         $this->beConstructedWith($slimApp);
     }
 
-    function it_is_initializable()
+    function it_is_initialized()
     {
         $this->shouldHaveType(Server::class);
     }
@@ -47,10 +48,42 @@ class ServerSpec extends ObjectBehavior
             ->beConstructedWith($slimInstance, __DIR__);
     }
 
-    function it_should_throw_a_DirectoryNotFound_exeption(App $slimInstance)
+    function it_should_throw_a_DirectoryNotFound_exception(App $slimInstance)
     {
         $this
             ->shouldThrow(DirectoryNotFound::class)
             ->during('__construct', [$slimInstance, __DIR__.'/../directory_does_not_exists']);
+    }
+
+    function it_should_set_the_asset_whitelist_correctly_with_custom_array_of_asset_types()
+    {
+        $this
+            ->setAllowedFileTypes([AssetType::STYLESHEET, AssetType::IMAGE])
+            ->shouldReturnAnInstanceOf(Server::class);
+
+        $this
+            ->getConfigVariables()
+            ->shouldBe([
+                'host' => '0.0.0.0',
+                'port' => 1337,
+                'env' => ServerEnvironment::PRODUCTION,
+                'allowedAssetFileTypes' => implode('|', [AssetType::STYLESHEET, AssetType::IMAGE]),
+            ]);
+    }
+
+    function it_should_set_the_asset_whitelist_correctly_with_custom_string_of_file_types()
+    {
+        $this
+            ->setAllowedFileTypes('css|png|js')
+            ->shouldReturnAnInstanceOf(Server::class);
+
+        $this
+            ->getConfigVariables()
+            ->shouldBe([
+                'host' => '0.0.0.0',
+                'port' => 1337,
+                'env' => ServerEnvironment::PRODUCTION,
+                'allowedAssetFileTypes' => 'css|png|js',
+            ]);
     }
 }
