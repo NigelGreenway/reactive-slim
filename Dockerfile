@@ -7,7 +7,6 @@ RUN apk update
 RUN apk add --update zlib-dev
 RUN docker-php-ext-install -j$(getconf _NPROCESSORS_ONLN) iconv
 RUN rm -rf /tmp/*
-RUN chmod +x ./test/Integration/ServerStub.php
 
 EXPOSE 1351
 
