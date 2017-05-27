@@ -56,7 +56,7 @@
     },
     "scripts": {
         "build": "docker build -t nigelgreenway:reactive-slim .",
-        "start": "docker run -d -p 1351:1351 --name reactive_slim nigelgreenway:reactive-slim",
+        "start": "docker run -v `pwd`:/var/app -d -p 1351:1351 --name reactive_slim nigelgreenway:reactive-slim",
         "restart": "docker restart reactive_slim",
         "stop": "docker stop reactive_slim",
         "test": "composer start && phpspec r && phpunit -c ./test/phpunit.xml.dist ./test && composer stop",
