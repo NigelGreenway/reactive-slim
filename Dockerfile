@@ -10,4 +10,4 @@ RUN rm -rf /tmp/*
 
 EXPOSE 1351
 
-ENTRYPOINT php ./test/Integration/ServerStub.php
+ENTRYPOINT ["php", "./example/app-prod-mode.php"]
