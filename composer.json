@@ -57,12 +57,12 @@
     "scripts": {
         "build": "docker build -t nigelgreenway:reactive-slim .",
         "start": "docker run -v `pwd`:/var/app -d -p 1351:1351 --name reactive_slim nigelgreenway:reactive-slim",
-        "restart": "docker restart reactive_slim",
-        "stop": "docker stop reactive_slim",
+        "restart": "docker restart -t 0 reactive_slim",
+        "stop": "docker stop -t 0 reactive_slim",
         "test": "composer start && phpspec r && phpunit -c ./test/phpunit.xml.dist ./test && composer stop",
         "check-style": "phpcs -p --standard=psr2-override.xml --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src",
         "fix-style": "phpcbf -p --standard=psr2-override.xml --runtime-set ignore_errors_on_exit 1 --runtime-set ignore_warnings_on_exit 1 src",
-        "clean": "rm -r ./{vendor,bin} && docker stop reactive_slim && docker rm reactive_slim",
+        "clean": "rm -r ./{vendor,bin} && docker stop -t 0 reactive_slim && docker rm reactive_slim",
         "post-install-cmd": [
             "captainhook install",
             "composer build"
