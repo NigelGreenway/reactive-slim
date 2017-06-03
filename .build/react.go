@@ -72,6 +72,15 @@ func getDevServerConfig () {
     json.Unmarshal(jsonFile, &settings)
 }
 
+func initConsole (directoriesBeingWatch []string) {
+    fmt.Println("Running React App")
+    fmt.Println("Current directories/files being watched:")
+    for _, directory := range directoriesBeingWatch {
+        fmt.Println("\t",directory)
+    }
+    fmt.Println("")
+}
+
 func main() {
     getDevServerConfig()
 
@@ -83,7 +92,7 @@ func main() {
     )
 
     startApp(serverPath, port, host)
-    log.Println("Running React App")
+    initConsole(directoriesToWatch)
 
     watcher, err := fsnotify.NewWatcher()
     if err != nil {
