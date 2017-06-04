@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Build & run container
+docker build -t reactive_slim_test -f ./Dockerfile.test .
+docker run -d -p 1351:1351 --name reactive_tests reactive_slim_test
+
+# run tests
+./bin/phpspec r
+./bin/phpunit -c ./test/phpunit.xml.dist
+
+# tidy up
+docker kill reactive_tests
+docker rm -f reactive_tests

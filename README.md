@@ -24,6 +24,18 @@ After creating your [Slim Instance](https://www.slimframework.com/), pass it to 
 
 _Please see the [examples](/example) for more information or run `php ./example/app-dev-mode.php`._
 
+If are you are running via PHP locally, you are able to pass the following flags to customise both the host and the port:
+
+`-h 0.0.0.0` or `--host=0.0.0.0` and `-p 8686` or `--port=8686`
+
+### Restarting your ReactApp
+
+There are 3 ways to restart your application (only tested on Linux - Solus, kernel 4.9.30-29.lts currently):
+
+ - `sh ./.tools/local-watch` runs via local PHP installation (requires `inotify-tools` to be installed via package manager)
+ - `sh ./.tools/reactor` run via local PHP installation and requires the `reactor.config.json` config
+ - `sh ./.tools/docker-watch` run the app within a Docker container (requires `inotify-tools` to be installed via package manager)
+
 ### Extra options
 
 `#withHost(<string>)` - The default host URL is `0.0.0.0` but is overridden by passing a string as the parameter

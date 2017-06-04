@@ -1,0 +1,11 @@
+#!/bin/sh
+
+composer start
+
+echo "Watching \`./example\` and \`./src\`"
+
+while true; do
+    filename=$(inotifywait -qre modify -e create -e move -e delete --format %f {./example,./src} )
+    printf "Restarted due to change in %s" $filename|awk '{split($0,a,"__"); print a[1]}'
+    docker restart -t 0 reactive_slim >> /dev/null
+done

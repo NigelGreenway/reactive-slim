@@ -1,0 +1,9 @@
+{
+    "server_path": "./example/app-dev-mode.php",
+    "port": "1337",
+    "host": "0.0.0.0",
+    "directories_to_watch": [
+        "./example/",
+        "./src/"
+    ]
+}

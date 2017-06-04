@@ -1,0 +1,14 @@
+#!/bin/sh
+
+php ./example/app-prod-mode.php &
+
+echo "Watching \`./example\` and \`./src\`"
+
+while true; do
+    filename=$(inotifywait -qre modify -e create -e move -e delete --format %f {./example,./src} )
+    printf "Restarted due to change in %s" $filename|awk '{split($0,a,"__"); print a[1]}'
+    kill `ps aux|grep app-prod-mode.php | \
+        head -n1 | \
+        awk -d='\t' '{print $2}'`
+    php ./example/app-prod-mode.php &
+done

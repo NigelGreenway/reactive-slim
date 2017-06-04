@@ -48,6 +48,7 @@ final class Server
         string       $directoryPath = null
     ) {
         $this->isAValidDirectory($directoryPath);
+        $this->setDefaults();
 
         $this->webRoot = $directoryPath;
         $this->slimInstance = $slimInstance;
@@ -190,6 +191,20 @@ final class Server
         );
         $this->loop    = $loop;
         $this->server  = new HttpServer($socketServer);
+    }
+
+    /**
+     * @return void
+     */
+    private function setDefaults()
+    {
+        $options = getopt('p::h::', ['port::', 'host::']);
+
+        $port = $options['p'] ?? $options['port'] ?? 1337;
+        $this->setPort((int) $port);
+
+        $host = $options['h'] ?? $options['host'] ?? '0.0.0.0';
+        $this->setHost($host);
     }
 
     /**
