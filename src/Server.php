@@ -10,8 +10,9 @@ use React\ {
     Socket\Server as SocketServer,
     Http\Server as HttpServer
 };
-use Slim\ {
+use Slim\{
     App as SlimInstance,
+    Http\Cookies as SlimCookies,
     Http\Response as SlimResponse
 };
 use Zend\Diactoros\ {
@@ -140,7 +141,7 @@ final class Server
                         $request->getMethod(),
                         $stream,
                         $request->getHeaders(),
-                        $request->getHeader('cookie'),
+                        SlimCookies::parseHeader($request->getHeader('Cookie')[0]),
                         $request->getQueryParams()
                     );
 
