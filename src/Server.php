@@ -153,13 +153,15 @@ final class Server
         });
 
         if ($this->environment !== ServerEnvironment::PRODUCTION) {
-            echo sprintf(
-                " >> Listening on http://%s:%d\n\nAssets allowed to be served: %s\n\nIn %s environment\n\n",
+            $output = sprintf(
+                " >> Listening on http://%s:%d\n\nIn %s environment\n\n",
                 $this->host,
                 $this->port,
-                str_replace('|', ', ', $this->whiteListedAssetFileTypes),
                 ServerEnvironment::getEnvironmentName($this->environment)
             );
+            $terminal = fopen('php://stdout', 'w');
+            fwrite($terminal, $output);
+            fclose($terminal);
         }
 
         $this->loop->run();
