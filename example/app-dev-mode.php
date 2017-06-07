@@ -5,7 +5,7 @@ require_once __DIR__ . '/../vendor/autoload.php';
 $slim = new \Slim\App();
 
 // Some slim configuration
-$slim->get('/', function( \Psr\Http\Message\RequestInterface $req, \Psr\Http\Message\ResponseInterface $res) {
+$slim->get('/', function( \Psr\Http\Message\ServerRequestInterface $req, \Psr\Http\Message\ResponseInterface $res) {
 
     $html = <<<HTML
 <html>
