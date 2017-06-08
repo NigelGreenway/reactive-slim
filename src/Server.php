@@ -141,7 +141,7 @@ final class Server
                         $request->getMethod(),
                         $stream,
                         $request->getHeaders(),
-                        SlimCookies::parseHeader($request->getHeader('Cookie')[0]),
+                        SlimCookies::parseHeader($request->getHeader('Cookie')),
                         $request->getQueryParams()
                     );
 
